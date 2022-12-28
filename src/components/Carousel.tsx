@@ -4,14 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 
-import mockData, { Movie } from '../data/mock'
-
-const Poster = ({cover, title}: Movie) => (
-    <article> 
-        <img src={cover} alt={title} />
-    </article>
-
-);
+import mockData from '../data/mock'
+import Poster from './Poster';
+import './Carousel.css'
 
 const Carousel = ({title='Filmes em destaque', data = mockData}) => {
 
@@ -41,12 +36,12 @@ const Carousel = ({title='Filmes em destaque', data = mockData}) => {
 
     return (
 
-        <section>
-            <h2 className="relative z-10 font-bold text-2xl ml-8 pb-2">
-             {title}
-            </h2>
-            <Slick className="relative" {...options}>{data.map((movie) => Poster(movie))} </Slick>
-        </section>
+        <section className='carousel'>
+      <h2 className='relative z-10 font-bold text-2xl ml-8'>{title}</h2>
+      <Slick className='relative mb-8' {...options}>
+        {data.map((movie) => Poster(movie))}
+      </Slick>
+    </section>
     )
 };
 
