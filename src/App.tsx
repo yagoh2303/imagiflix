@@ -4,6 +4,7 @@ import CONST from './data/constants';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
 import Carousel from './components/Carousel';
+import Footer from './components/Footer'
 
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,32 +15,40 @@ const App = () =>  {
   
 
   const [movies, setMovies] = useState();
+  const [series, setSeries] = useState();
 
     useEffect (() => {
       const fetchData = async () => {
 
-        const response = await fetch (`${URL}/discover/movie?api_key=${APIKEY}&language=pt-BR&sort_by=popularity.desc`);
+        const movies = await fetch (`${URL}/discover/movie?api_key=${APIKEY}&language=pt-BR&sort_by=popularity.desc`);
 
-        const data = await response.json();
+        const moviesData = await movies.json();
 
-        setMovies(data);
-      }
-        fetchData(); 
-      
-    }, []);
+      setMovies(moviesData);
 
-    useEffect(() => movies && console.log(movies), [ movies ]);
+        const series = await fetch (`${URL}/discover/tv?api_key=${APIKEY}&language=pt-BR&sort_by=popularity .desc`);
+
+        const seriesData = await series.json();
+
+      setSeries(seriesData);
+    }
+
+    fetchData();
+  }, []);
+
+   // useEffect(() => movies && console.log(movies), [ movies ]);
   
   
-  return(
-    <div className="m-auto antialised font-sans bg-gray-900 text-white">
-      <Hero {...movies?.results[0]} />
-      <Navbar /> 
-      <Carousel />
-      <Carousel />
-      <Carousel />
-    </div>
-  );
+    return (
+      <div className='m-auto antialised font-sans bg-black text-white'>
+        <Hero {...movies?.results[0]} />
+        <Navbar />
+        <Carousel title="Filmes populares na Imagiflix" data={movies?.results}/>
+        <Carousel title="Séries populares na Imagiflix"  data={series?.results}/>
+        <Carousel title="Placeholder"/>
+        <Footer />
+      </div>
+    );
 
 }
 
