@@ -2,6 +2,7 @@
   "name": "imagiflix-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://yagoh2303.github.io/imagiflix",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.1",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
@@ -23,6 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "tailwind:css": "npx tailwind build src/tailwind.css -c tailwind.config.js -o src/index.css",
     "start": "yarn tailwind:css && react-scripts start",
     "build": "yarn tailwind:css && react-scripts build",
