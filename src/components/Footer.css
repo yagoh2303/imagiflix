@@ -1,0 +1,11 @@
+.links a:hover {
+    color: white;
+}
+
+.link {
+    cursor:pointer;
+}
+
+.link:hover {
+    color:white;
+}
